@@ -13,6 +13,7 @@ import {
   Platform,
   PlatformOSType,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Switch,
   Text,
@@ -25,7 +26,11 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Service from './Service';
 
-const { width, height } = Dimensions.get('window');
+//const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
+const statusbarHeight = Platform.OS === 'ios' ? 0 : StatusBar.currentHeight;
+const height = Dimensions.get('window').height - 36;
+
 //Set default popup height to 67% of the screen height
 const defaultHeight = height * 0.67;
 //To support layout animation on Android, though not yet working
@@ -62,6 +67,7 @@ export default class MarkerPopup extends Component {
   componentWillMount() {
     console.log('calling Component Will Mount');
     console.log('marker popup state is currently' + JSON.stringify(this.state));
+    console.log('Screen height is: ' + height + ' statusnbar h: ' + StatusBar.currentHeight);
     // Initialize PanResponder to handle move gestures
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -221,7 +227,6 @@ export default class MarkerPopup extends Component {
   }
 
   lightSwitchHandler(id, value) {
-    //this.setState({ lightSwitch: value });
     (value) ? str = 'on' : str = 'off';
     Service.handleLightSwitch(id, str)
     .then((data) => {
@@ -229,11 +234,8 @@ export default class MarkerPopup extends Component {
       this.setState({ lightSwitch: value });
     })
     .catch((err) => { console.error('error turning light ' + str + ': ' + err)})
-    //need to map value to on/off
-    //TODO - callback to model to set light switch value; set state once Promise is resolved
   }
 
-  //TODO - callback to model to get light switch value
   // return true means light (switch) is on; return false means light (switch) is off
   getSwitchValue(id) {
     console.log('checking light switch value with id: ' + id);
@@ -241,13 +243,10 @@ export default class MarkerPopup extends Component {
     .then((data) => { 
       console.log('Light switch value is: ' + JSON.stringify(data) + ' and non-string form ' + data);
       this.setState({ lightSwitch: data });
-      //return data;
     })
     .catch((err) => { 
       console.error('error getting light status: ' + err); 
-      //return false; 
     })
-    //return false;
   }
 
   render() {
