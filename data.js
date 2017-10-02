@@ -1,22 +1,61 @@
-const assetType = [ 'spoke', 'hub', 'chargingSta', 'source'];
+const assetType = [ 'ant', 'gateway', 'service', 'client'];
 
-export const nodes = [
+export const ants = [
     {
-      id: 'a001',
+      _id: 'a001',
       name: 'pizeroW1',
       description: 'lake road backyard',
       countryCode: 'us',
-      lat: 42.31,
-      long: -71.37,
-      assetType: 'spoke',
+      coordinate: { 
+        latitude: 42.324094,
+        longitude: -71.384572, 
+      },
+      latitude: 42.324094,
+      longitude: -71.384572, 
+      assetType: 'ant',
+      isActive: true,
+      status: 'Active',
+      radius: 50, //ft radius coverage
+      dateFirstOnline: '9/10/2017',
+      dateLastServiced: '9/10/2017',
+      hasWarning: true,
     },
     {
-        id: 'a002',
+        _id: 'a002',
         name: 'pizeroW2',
         description: 'lake road frontyard',
         countryCode: 'us',
-        lat: 42.324094,
-        long: -71.384572,
-        assetType: 'spoke',
+        coordinate: { 
+          latitude: 42.324109,
+          longitude: -71.384672, 
+        },
+        latitude: 42.324109,
+        longitude: -71.384672, 
+        assetType: 'ant',
+        isActive: true,
+        status: 'Active',
+        radius: 50, //ft radius coverage
+        dateFirstOnline: '9/10/2017',
+        dateLastServiced: '9/10/2017',
+        hasWarning: false,
+      },
+      {
+        _id: 'a003',
+        name: 'Natick Mall pizero1',
+        description: 'Natick Mall',
+        countryCode: 'us',
+        coordinate: { 
+          latitude: 42.3009,
+          longitude: -71.3842, 
+        },
+        latitude: 42.3009,
+        longitude: -71.3842, 
+        assetType: 'ant',
+        isActive: false,
+        status: 'Recommended',
+        radius: 0, //ft radius coverage- only for active ants
+        dateFirstOnline: '9/10/2017',
+        dateLastServiced: '9/10/2017',
+        hasWarning: false,
       },
   ];
